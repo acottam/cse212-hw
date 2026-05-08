@@ -8,12 +8,22 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Approach: Create an array of the specified length, then loop from 0 to length-1,
+        // calculating each multiple and assigning it to the array.
+        // Finally, return the array.
+        
+        // Create an array of the specified length
+        double[] multiples = new double[length];
 
-        return []; // replace this return statement with your own
+        // Loop through the array indices
+        for (int i = 0; i < length; i++)
+        {
+            // Calculate the multiple and assign it to the array
+            multiples[i] = number * (i + 1);
+        }
+
+        // Return the array of multiples
+        return multiples;
     }
 
     /// <summary>
@@ -25,9 +35,29 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Approach: Reverse 3 times
+        // 1. Reverse the entire list
+        // 2. Reverse the first 'amount' elements
+        // 3. Reverse the remaining elements
+        // Results in a right rotation)
+
+        // Calculate the effective rotation amount (not needed if amount is guaranteed to be in range)
+        int n = data.Count;
+        
+        // Handle cases where amount is greater than n
+        amount = amount % n;
+
+        // 1. Reverse the entire list
+        data.Reverse();
+
+        // Reverse the first 'amount' elements
+        data.Reverse(0, amount);
+
+        // 3. Reverse the remaining 'n - amount' elements
+        data.Reverse(amount, n - amount);
+
+        // Results: The list is now rotated to the right by the specified amount
+        // Existing list 'data' is modified in place
+        // No return needed
     }
 }
