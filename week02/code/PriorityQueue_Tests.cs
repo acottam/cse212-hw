@@ -13,7 +13,11 @@ public class PriorityQueueTests
     {
         var priorityQueue = new PriorityQueue();
         priorityQueue.Enqueue("Alice", 5);
+
+        // Dequeue should return "Alice" since it's the only item in the queue.
         var result = priorityQueue.Dequeue();
+        
+        // Verify the result is "Alice".
         Assert.AreEqual("Alice", result);
     }
 
@@ -24,10 +28,16 @@ public class PriorityQueueTests
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
+
+        // Enqueue items with varying priorities.
         priorityQueue.Enqueue("Low", 1);
         priorityQueue.Enqueue("High", 10);
         priorityQueue.Enqueue("Med", 5);
+
+        // Dequeue should return "High" since it has the highest priority (10).
         var result = priorityQueue.Dequeue();
+        
+        // Verify the result is "High".
         Assert.AreEqual("High", result);
     }
 
@@ -39,10 +49,16 @@ public class PriorityQueueTests
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
+
+        // Enqueue multiple items with the same priority.
         priorityQueue.Enqueue("First", 5);
         priorityQueue.Enqueue("Second", 5);
         priorityQueue.Enqueue("Third", 5);
+
+        // Dequeue should return "First" since it was the first item added with the highest priority (5).
         var result = priorityQueue.Dequeue();
+
+        // Verify the result is "First".
         Assert.AreEqual("First", result);
     }
 
@@ -53,13 +69,18 @@ public class PriorityQueueTests
     public void TestPriorityQueue_4()
     {
         var priorityQueue = new PriorityQueue();
+        
+        // Attempting to dequeue from an empty queue should throw an exception.
         try
         {
             priorityQueue.Dequeue();
+            
+            // If no exception is thrown, the test should fail.
             Assert.Fail("Exception should have been thrown.");
         }
         catch (InvalidOperationException e)
         {
+            // Verify the exception message is correct.
             Assert.AreEqual("The queue is empty.", e.Message);
         }
     }
@@ -72,12 +93,19 @@ public class PriorityQueueTests
     public void TestPriorityQueue_5()
     {
         var priorityQueue = new PriorityQueue();
+
+        // Enqueue multiple items with different priorities.
         priorityQueue.Enqueue("A", 3);
         priorityQueue.Enqueue("B", 7);
         priorityQueue.Enqueue("C", 5);
 
+        // Dequeue should return "B" first (highest priority), then "C", then "A".
         Assert.AreEqual("B", priorityQueue.Dequeue());
+
+        // After "B" is removed, "C" should be next highest priority.
         Assert.AreEqual("C", priorityQueue.Dequeue());
+        
+        // After "C" is removed, "A" should be next highest priority.
         Assert.AreEqual("A", priorityQueue.Dequeue());
     }
 
@@ -89,10 +117,14 @@ public class PriorityQueueTests
     public void TestPriorityQueue_6()
     {
         var priorityQueue = new PriorityQueue();
+        
+        // Enqueue multiple items with different priorities.
         priorityQueue.Enqueue("First", 1);
         priorityQueue.Enqueue("Second", 2);
         priorityQueue.Enqueue("Third", 10);
         var result = priorityQueue.Dequeue();
+        
+        // Verify the result is "Third" since it has the highest priority (10).
         Assert.AreEqual("Third", result);
     }
 }
