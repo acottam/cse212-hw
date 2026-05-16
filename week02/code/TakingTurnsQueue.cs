@@ -40,10 +40,13 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
+
+            // If the person has no more turns, then they are not added back to the queue.  If they have more than 1 turn, then they are added back to the queue with one less turn.
             if (person.Turns <= 0)
             {
                 _people.Enqueue(person);
             }
+            // If the person has more than 1 turn, then they are added back to the queue with one less turn.
             else if (person.Turns > 1)
             {
                 person.Turns -= 1;
