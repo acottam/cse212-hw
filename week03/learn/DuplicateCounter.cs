@@ -22,9 +22,25 @@
         Console.WriteLine($"Number of duplicates : {CountDuplicates(data)}");
     }
 
+    // Loop through the data, check for membership in the set.
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        // If yes, then increase the counter; otherwise, add it to the set.
+        var seen = new HashSet<int>();
+
+        // If the item is already in the set, then it's a duplicate. Add it to the duplicates set.
+        var duplicates = new HashSet<int>();
+
+        // If the item is not in the set, then add it to the set.
+        foreach (var item in data)
+        {
+            // Add returns false if the item is already in the set.
+            if (!seen.Add(item))
+                // The item is a duplicate. Add it to the duplicates set.
+                duplicates.Add(item);
+        }
+
+        // The number of duplicates is the size of the duplicates set.
+        return duplicates.Count;
     }
 }
