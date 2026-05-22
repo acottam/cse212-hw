@@ -32,7 +32,13 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        // If 1st element in the array is false, then we can't move left.
+        if (!_mazeMap[(_currX, _currY)][0])
+            // If we can't move left, then throw an exception.
+            throw new InvalidOperationException("Can't go that way!");
+        
+        // We can move left: decrement the x value.
+        _currX--;
     }
 
     /// <summary>
@@ -41,7 +47,13 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        // If 2nd element in the array is false, then we can't move right.  
+        if (!_mazeMap[(_currX, _currY)][1])
+            // If we can't move right, then throw an exception.
+            throw new InvalidOperationException("Can't go that way!");
+        
+        // We can move right: increment the x value.
+        _currX++;
     }
 
     /// <summary>
@@ -50,7 +62,13 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        // If 3rd element in the array is false, then we can't move up.
+        if (!_mazeMap[(_currX, _currY)][2])
+            // If we can't move up, then throw an exception.
+            throw new InvalidOperationException("Can't go that way!");
+        
+        // We can move up: decrement the y value.
+        _currY--;
     }
 
     /// <summary>
@@ -59,7 +77,13 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        // If 4th element in the array is false, then we can't move down.
+        if (!_mazeMap[(_currX, _currY)][3])
+            // If we can't move down, then throw an exception.
+            throw new InvalidOperationException("Can't go that way!");
+        
+        // We can move down: increment the y value.
+        _currY++;
     }
 
     public string GetStatus()
