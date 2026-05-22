@@ -21,8 +21,28 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Hashset is a collection of unique items - O(1)
+        var seen = new HashSet<string>();
+
+        // List of strings that will contain the symmetric pairs.
+        var symmetricPairs = new List<string>();
+
+        // Loop through each word in the input array. 
+        foreach (var word in words)
+        {
+            // Reverse the words 
+            var reversed = $"{word[1]}{word[0]}";
+
+            // If the reversed word is in the seen set and the original word is not a palindrome
+            if (word[0] != word[1] && seen.Contains(reversed))
+                symmetricPairs.Add($"{word} & {reversed}");
+
+            // Add the original word to the seen set for future comparisons.
+            seen.Add(word);
+        }
+        
+        // Convert the list of symmetric pairs to an array and return it.
+        return symmetricPairs.ToArray();
     }
 
     /// <summary>
