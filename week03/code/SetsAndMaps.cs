@@ -58,13 +58,30 @@ public static class SetsAndMaps
     /// <returns>fixed array of divisors</returns>
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
+        // Degrees: key is the degree, value is the count of people with that degree
         var degrees = new Dictionary<string, int>();
+        
+        // Read the file line by line. For each line, split it by commas to extract the fields.
         foreach (var line in File.ReadLines(filename))
         {
+            // Fields split by comma
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+
+            // Degree is the 4th column (index 3)
+            var degree = fields[3].Trim();
+
+            // If the degree is already in the dictionary, increment the count. 
+            if (degrees.ContainsKey(degree))
+                // Increment count
+                degrees[degree]++;
+
+            // First time seeing degree
+            else
+                // Degree is not in dictionary. Add count of 1 for this degree.
+                degrees[degree] = 1;
         }
 
+        // Return dictionary of degrees and their counts.
         return degrees;
     }
 
