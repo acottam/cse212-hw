@@ -103,8 +103,38 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Dictionary to count the occurrences of each character in word1
+        var counts = new Dictionary<char, int>();
+
+        // Loop through each character in word1, ignoring spaces and case
+        foreach (var c in word1.ToLower())
+        {
+            // Ignore spaces
+            if (c == ' ') continue;
+
+            // If the character is already in the dictionary, increment its count
+            if (counts.ContainsKey(c)) counts[c]++;
+
+            // First time getting this character - Add 1 to counts for this character
+            else counts[c] = 1;
+        }
+
+        // Loop through each character in word2, ignoring spaces and case
+        foreach (var c in word2.ToLower())
+        {
+
+            // Ignore spaces
+            if (c == ' ') continue;
+
+            // If the character is in the dictionary, decrement its count
+            if (counts.ContainsKey(c)) counts[c]--;
+
+            // Not an anagram if the character is not in the dictionary - Return false.
+            else return false;
+        }
+        
+        // Check if all counts are zero - if so, the words are anagrams.
+        return counts.Values.All(v => v == 0);
     }
 
     /// <summary>
