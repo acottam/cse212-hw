@@ -153,21 +153,33 @@ public static class SetsAndMaps
     /// </summary>
     public static string[] EarthquakeDailySummary()
     {
+        // URL for the USGS - geoJSON format 
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+
+        // HttpClient - for GET requests 
         using var client = new HttpClient();
+
+        // Create an HTTP GET request message for the specified URI and send it using the HttpClient.
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+
+        // Read resonse in a stream and convert to string
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
+
+        // to the specified URI and read the response as a stream.
         using var reader = new StreamReader(jsonStream);
+
+        // Read rsonsponse stream into JSON string
         var json = reader.ReadToEnd();
+
+        // Options for JSON deserialization: PropertyNameCaseInsensitive ignores case
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
+        // Deserialize the JSON string into a FeatureCollection object. 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        // TODO Problem 5:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
-        // 3. Return an array of these string descriptions.
-        return [];
+        // Return array of strings describing earthquake location and magnitude
+        return featureCollection!.Features
+            .Select(f => $"{f.Properties.Place} - Mag {f.Properties.Mag}")
+            .ToArray();
     }
 }
