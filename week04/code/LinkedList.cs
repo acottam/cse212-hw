@@ -87,7 +87,26 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void RemoveTail()
     {
-        // TODO Problem 2
+        // If the list has only one item (or is empty), set both to null.
+        if (_head == _tail)
+        {
+            // Head: oldTail -> null
+            _head = null;
+
+            // Tail: oldTail -> null
+            _tail = null;
+        }
+        // If the list has more than one item, only tail will be affected.
+        else if (_tail is not null)
+        {
+            // Tail: null <- oldTail -> null
+            // Disconnect the second-to-last node from the last node
+            _tail.Prev!.Next = null;
+
+            // Tail: null <- oldTail -> null
+            // Update the tail to point to the second-to-last node
+            _tail = _tail.Prev; 
+        }
     }
 
     /// <summary>
