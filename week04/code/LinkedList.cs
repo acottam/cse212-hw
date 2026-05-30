@@ -150,7 +150,46 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
-        // TODO Problem 3
+        // Search for the node that matches 'value' starting at the head.
+        Node? curr = _head;
+
+        // If we find the node that contains 'value', then we need to remove it.
+        while (curr is not null)
+        {
+            // If we find the node that contains 'value', then we need to remove it.
+            if (curr.Data == value)
+            {
+                // If the node is at the head, use RemoveHead.
+                if (curr == _head)
+                    // RemoveHead will update the head to point 
+                    // to the next node and disconnect the old head from the list.
+                    RemoveHead();
+
+                // If the node is at the tail, use RemoveTail.
+                else if (curr == _tail)
+                    // RemoveTail will update the tail to point to the 
+                    // previous node and disconnect the old tail from the list.
+                    RemoveTail();
+
+                // Otherwise, reconnect the surrounding nodes to skip over this one.
+                else
+                {
+                    // Node: null <- prevNode -> curr -> nextNode -> null
+                    // Reconnect prevNode to nextNode, skipping over curr
+                    curr.Prev!.Next = curr.Next;
+
+                    // Node: null <- prevNode -> nextNode -> null
+                    // Reconnect nextNode to prevNode, skipping over curr
+                    curr.Next!.Prev = curr.Prev;
+                }
+
+                // Return after removing the first match.  
+                return;
+            }
+            
+            // Keep looking for the node that matches 'value'
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
