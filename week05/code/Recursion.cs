@@ -42,7 +42,24 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+        // Base Case
+        if (word.Length == size)
+        {
+            // Permutation Found (Correct size) - Added to results 
+            results.Add(word);
+            
+            // Escape out of the function to continue searching for other permutations
+            return;
+        }
+        
+        // Recursive Case
+        for (int i = 0; i < letters.Length; i++)
+        {
+            // Choose the letter at index i and add it to the current word
+            // Then removes the letter at index i from the list of letters
+            // Continue searching for permutations with the remaining letters.
+            PermutationsChoose(results, letters[..i] + letters[(i+1)..], size, word + letters[i]);
+        }
     }
 
     /// <summary>
