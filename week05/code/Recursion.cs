@@ -151,7 +151,24 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+        // Base Case: No more wildcards - Addpattern to the results
+        int idx = pattern.IndexOf('*');
+
+        // Recursive Case: Replace the first wildcard with both 0 and 1 and continue searching for more wildcards
+        if (idx == -1)
+        {
+            // No more wildcards - Add pattern to the results
+            results.Add(pattern);
+
+            // Escape out of the function - Continue searching
+            return;
+        }
+
+        // Replace the first wildcard with 0 and continue searching for more wildcards
+        WildcardBinary(pattern[..idx] + "0" + pattern[(idx + 1)..], results);
+        
+        // Replace the first wildcard with 1 and continue searching for more wildcards
+        WildcardBinary(pattern[..idx] + "1" + pattern[(idx + 1)..], results);
     }
 
     /// <summary>
