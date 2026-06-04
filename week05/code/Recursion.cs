@@ -116,10 +116,23 @@ public static class Recursion
         if (s == 3)
             return 4;
 
-        // TODO Start Problem 3
+        // Recursive Case with Memoization
+        if (remember == null)
+            // Initialize the dictionary to store previously calculated results for different values of s
+            remember = new Dictionary<int, decimal>();
 
-        // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        // Check if we have already calculated the number of ways to climb s stairs
+        if (remember.ContainsKey(s))
+            // Alreay memorized - Avoid redundant calculations
+            return remember[s];
+
+        // Calculate the number of ways to climb s stairs using the recursive relation
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+
+        // Memorize the calculated result for the current value of s (stored in dictionary)
+        remember[s] = ways;
+        
+        // Calculated ways to climb s stairs (both calculated and memorized)
         return ways;
     }
 
