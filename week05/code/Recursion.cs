@@ -179,15 +179,35 @@ public static class Recursion
     {
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
-        if (currPath == null) {
+        if (currPath == null)
+        {
             currPath = new List<ValueTuple<int, int>>();
         }
-        
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
 
-        // TODO Start Problem 5
-        // ADD CODE HERE
+        // Base Case: Reached the end of the maze - Add the current path to the results
+        currPath.Add((x, y));
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        // Recursive Case: Explore all valid moves from the current position
+        if (maze.IsEnd(x, y))
+        {
+            // Reached the end of the maze - Add the current path to the results
+            results.Add(currPath.AsString());
+        }
+
+        // Explore all valid moves from the current position (right, left, down, up)
+        else
+        {
+            // Check each possible move (right, left, down, up) and recursively call SolveMaze for valid moves
+            foreach (var (dx, dy) in new[] { (1, 0), (-1, 0), (0, 1), (0, -1) })
+            {
+                // Check if the move is valid
+                if (maze.IsValidMove(currPath, x + dx, y + dy))
+                    // Valid move - Continue searching for paths from the new position
+                    SolveMaze(results, maze, x + dx, y + dy, currPath);
+            }
+        }
+
+        // Backtrack: Remove current position from path - Return to previous position
+        currPath.RemoveAt(currPath.Count - 1);
     }
 }
