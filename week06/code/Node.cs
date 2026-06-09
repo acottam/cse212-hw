@@ -21,11 +21,13 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+        // If value is equal to Data, do nothing (no duplicates allowed)
+        else if (value > Data)
         {
             // Insert to the right
             if (Right is null)
                 Right = new Node(value);
+            // Recursive call to insert the value in the right subtree
             else
                 Right.Insert(value);
         }
