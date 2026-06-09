@@ -52,6 +52,14 @@ public class Node
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        
+        // Calculate the height of the left and right subtrees
+        int leftHeight = Left?.GetHeight() ?? 0;
+        
+        // Calculate the height of the right subtree
+        int rightHeight = Right?.GetHeight() ?? 0;
+        
+        // Return the height of the tree
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
